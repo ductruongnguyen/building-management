@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Services</title>
+</head>
+<body>
+    <a th:href="@{/services/add}">Add a new Service</a>
+    <table>
+        <tr>
+            <th>MaDV</th>
+            <th>TenDV</th>
+            <th>LoaiDV</th>
+            <th>DonGia</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="service : ${services}">
+            <td th:text="${service.getMA_DV()}"></td>
+            <td th:text="${service.getTEN_DV()}"></td>
+            <td th:text="${service.getLOAI_DV()}"></td>
+            <td th:text="${service.getDON_GIA_CS()}"></td>
+            <td><a th:href="@{/services/update(serviceId=${service.getMA_DV()})}">Update</a></td>
+            <td><a th:href="@{/services/delete(serviceId=${service.getMA_DV()})}">Delete</a></td>
+        </tr>
+    </table>
+</body>
+</html>
