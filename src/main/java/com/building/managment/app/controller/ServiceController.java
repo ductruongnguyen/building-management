@@ -19,49 +19,49 @@ public class ServiceController {
 
     @GetMapping
     public String showServices(Model model) {
-        List<Services> servicesList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/service/all", Services[].class));
+        List<Services> servicesList = Arrays.asList(rest.getForObject("http://localhost:8080/service/all", Services[].class));
         System.out.println(servicesList);
         model.addAttribute("services", servicesList);
-        return "listServices";
+        return "/service/listServices";
     }
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("service", new Services());
-        return "addServices";
+        return "/service/addServices";
     }
 
     @GetMapping("/update")
     public String showUpdateForm(@RequestParam("serviceId") String id, Model model) {
-        Services service = rest.getForObject("http://172.16.0.196:8080/service/{MA_DV}", Services.class, id);
+        Services service = rest.getForObject("http://localhost:8080/service/{MA_DV}", Services.class, id);
         model.addAttribute("service", service);
-        return "updateServices";
+        return "/service/updateServices";
     }
 
     @GetMapping("/delete")
     public String deleteService(@RequestParam("serviceId") String id) {
-        rest.delete("http://172.16.0.196:8080/service/{MA_DV}", id);
+        rest.delete("http://localhost:8080/service/{MA_DV}", id);
         return "redirect:/services";
     }
 
     @GetMapping("/search")
     public String searchService(@RequestParam("keyword") String keyword, Model model) {
-        List<Services> servicesList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/service/search?keyword=" + keyword, Services[].class));
+        List<Services> servicesList = Arrays.asList(rest.getForObject("http://localhost:8080/service/search?keyword=" + keyword, Services[].class));
         model.addAttribute("services", servicesList);
-        return "listServices";
+        return "/service/listServices";
     }
 
     @PostMapping
     public String addServices(Services service) {
         System.out.println(service);
-        rest.postForObject("http://172.16.0.196:8080/service", service, Services.class);
+        rest.postForObject("http://localhost:8080/service", service, Services.class);
         return "redirect:/services";
     }
 
-    @PostMapping("/updates")
+    @PostMapping("/update")
     public String updateServices(Services service) {
         System.out.println(service);
-        rest.put("http://172.16.0.196:8080/service/{MA_DV}", service, service.getMA_DV());
+        rest.put("http://localhost:8080/service/{MA_DV}", service, service.getMA_DV());
         return "redirect:/services";
     }
 }

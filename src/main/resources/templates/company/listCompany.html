@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Company</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <p><a th:href="@{/company/add}">Add a new Company</a></p>
+    <div class="search-container">
+        <form th:action="@{/company/search}" method="get">
+            <input type="text" placeholder="Search.." name="keyword">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <table>
+        <tr>
+            <th>MA_CT</th>
+            <th>TEN_CT</th>
+            <th>MST</th>
+            <th>LINH_VUC</th>
+            <th>DIA_CHI</th>
+            <th>SDT</th>
+            <th>SO_NV</th>
+            <th>DIEN_TICH</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="company : ${companyList}">
+            <td th:text="${company.getMA_CT()}"></td>
+            <td th:text="${company.getTEN_CT()}"></td>
+            <td th:text="${company.getMST()}"></td>
+            <td th:text="${company.getLINH_VUC()}"></td>
+            <td th:text="${company.getDIA_CHI()}"></td>
+            <td th:text="${company.getSDT()}"></td>
+            <td th:text="${company.getSO_NV()}"></td>
+            <td th:text="${company.getDIEN_TICH()}"></td>
+            <td><a th:href="@{/services/update(trackingId=${company.getMA_CT()})}">Update</a></td>
+            <td><a th:href="@{/services/delete(trackingId=${company.getMA_CT()})}">Delete</a></td>
+        </tr>
+    </table>
+</body>
+</html>
