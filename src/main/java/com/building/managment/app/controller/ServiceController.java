@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,6 +42,13 @@ public class ServiceController {
     public String deleteService(@RequestParam("serviceId") String id) {
         rest.delete("http://172.16.0.196:8080/service/{MA_DV}", id);
         return "redirect:/services";
+    }
+
+    @GetMapping("/search")
+    public String searchService(@RequestParam("keyword") String keyword, Model model) {
+        List<Services> servicesList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/service/search?keyword=" + keyword, Services[].class));
+        model.addAttribute("services", servicesList);
+        return "listServices";
     }
 
     @PostMapping

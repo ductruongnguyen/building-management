@@ -4,9 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>List Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <a th:href="@{/services/add}">Add a new Service</a>
+    <p><a th:href="@{/services/add}">Add a new Service</a></p>
+    <div class="search-container">
+        <form th:action="@{/services/search}" method="get">
+            <input type="text" placeholder="Search.." name="keyword">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
     <table>
         <tr>
             <th>MaDV</th>
