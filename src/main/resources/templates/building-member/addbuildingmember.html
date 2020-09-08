@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Services</title>
+</head>
+<body>
+    <form th:action="@{/services}" method="POST" th:object="${service}">
+        <table>
+            <tr>
+                <td>MaDV: </td>
+                <td><input type="text" th:field="*{MA_DV}"></td>
+            </tr>
+            <tr>
+                <td>TenDV: </td>
+                <td><input type="text" th:field="*{TEN_DV}"></td>
+            </tr>
+            <tr>
+                <td>LoaiDV: </td>
+                <td><input type="text" th:field="*{LOAI_DV}"></td>
+            </tr>
+            <tr>
+                <td>DonGia: </td>
+                <td><input type="text" th:field="*{DON_GIA_CS}"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
