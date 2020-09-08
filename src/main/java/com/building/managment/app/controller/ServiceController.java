@@ -35,7 +35,7 @@ public class ServiceController {
     public String showUpdateForm(@RequestParam("serviceId") String id, Model model) {
         Services service = rest.getForObject("http://172.16.0.196:8080/service/{MA_DV}", Services.class, id);
         model.addAttribute("service", service);
-        return "/service/updateServices";
+        return "/service/listServices";
     }
 
     @GetMapping("/delete")
