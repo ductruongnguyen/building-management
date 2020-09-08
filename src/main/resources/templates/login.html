@@ -19,14 +19,14 @@
     <!-- //Fonts -->
 </head>
 <body>
-`
-<h1>WELLCOM</h1>
+
+<h1>WELCOM</h1>
 
 <div class="w3layoutscontaineragileits">
-    <h2>Login here</h2>
+    <h2>Have a nice day</h2>
     <form th:action="@{/login}" th:object="${user}" method="post">
-        <input type="text" th:field="*{name}" placeholder="Username" required="">
-        <input type="password" th:field="*{pwd}" placeholder="PASSWORD" required="">
+        <input type="text" th:field="*{name}" placeholder="Username" required>
+        <input type="password" th:field="*{pwd}" placeholder="Password" required>
         <ul class="agileinfotickwthree">
             <li>
                 <input type="checkbox" id="brand1" value="">
@@ -34,22 +34,19 @@
             </li>
         </ul>
         <div class="aitssendbuttonw3ls">
-            <input type="submit" value="LOGIN" onclick="alert('Welcome to Quản Lý Tòa Nhà')" >
-            <!-- 	<button type="submit" value="Login" class="btn btn-success" onclick="alert('Welcome to Quản Lý Tòa Nhà')">
-                 <a target="_blank" href="index.html"><i class="fa fa-power-off"></i></a>   -->
+            <input type="submit" value="LOGIN">
             <div class="clear"></div>
         </div>
     </form>
 </div>
 <div class="w3footeragile">
-    <p>02/09/2020 @ Design by team TTD</p>
+    <p>@Design by team TTD</p>
 </div>
 
-
-<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" th:src="@{js/jquery-2.1.4.min.js}"></script>
 
 <!-- pop-up-box-js-file -->
-<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+<script th:src="@{js/jquery.magnific-popup.js}" type="text/javascript"></script>
 <!--//pop-up-box-js-file -->
 <script>
     $(document).ready(function() {
