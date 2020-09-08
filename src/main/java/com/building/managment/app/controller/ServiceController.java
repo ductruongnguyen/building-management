@@ -32,14 +32,14 @@ public class ServiceController {
     }
 
     @GetMapping("/update")
-    public String showUpdateForm(@RequestParam("serviceId") String id, Model model) {
+    public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
         Services service = rest.getForObject("http://172.16.0.196:8080/service/{MA_DV}", Services.class, id);
         model.addAttribute("service", service);
-        return "/service/listServices";
+        return "/service/addServices";
     }
 
     @GetMapping("/delete")
-    public String deleteService(@RequestParam("serviceId") String id) {
+    public String deleteService(@RequestParam("trackingId") String id) {
         rest.delete("http://172.16.0.196:8080/service/{MA_DV}", id);
         return "redirect:/services";
     }
