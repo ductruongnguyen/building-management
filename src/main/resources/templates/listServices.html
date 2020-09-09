@@ -32,7 +32,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <!-- TOPBAR - SEARCH -->
+                <!-- TOPBAR - SEARCH (SUA SEARCH O DAY)-->
                 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/service/search}" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" name="keyword">
@@ -70,16 +70,16 @@
             <!-- MAIN TABLE HEREEEEEEEEEEEEEEEEEEEEE -->
             <div class="main-content">
                 <div class="container-fluid content-top-gap">
-                    <!-- BREADCRUMB - DUONG DAN TONG HOP-->
+                    <!-- BREADCRUMB - (SUA DUONG DAN TONG HOP O DAY)-->
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb my-breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/templates/service}">Quản lý dịch vụ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/service}">Quản lý dịch vụ</a></li>
                         </ol>
                     </nav>
-                    <!-- BUTTON THEM MOIIIIIIIIIIIII-->
-                    <a type="button" class="btn btn-primary" th:href="@{/service/add}">Thêm mới</a>
-                    <!-- TABLE!!!!!!! -->
+                    <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
+                    <a type="button" class="btn btn-success" th:href="@{/service/add}">Thêm mới</a>
+                    <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">
                             <div class="card-body pb-0">
@@ -102,12 +102,12 @@
                                                 <tr th:each="service : ${services}">
                                                     <td th:text="${service.getTEN_DV()}"></td>
                                                     <td th:text="${service.getLOAI_DV()}"></td>
-                                                    <td th:text="${service.getDON_GIA_CS()}"></td>
+                                                    <td th:text="${#numbers.formatDecimal(service.getDON_GIA_CS(), 0, 'COMMA', 0, 'POINT')}"></td>
                                                     <td>
-                                                        <button type="button" class="btn btn-primary">
+                                                        <button type="button" class="btn btn-warning">
                                                                 <a style="color: white;text-decoration: none;"
                                                                 th:href="@{/service/update(trackingId=${service.getMA_DV()})}">Sửa</a></button>
-                                                        <button type="button" class="btn btn-primary">
+                                                        <button type="button" class="btn btn-danger">
                                                                 <a style="color: white;text-decoration: none;"
                                                                 th:href="@{/service/delete(trackingId=${service.getMA_DV()})}">Xóa</a></button>
                                                     </td>

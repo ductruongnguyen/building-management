@@ -35,7 +35,7 @@ public class ServiceController {
     public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
         Services service = rest.getForObject("http://172.16.0.196:8080/service/{MA_DV}", Services.class, id);
         model.addAttribute("service", service);
-        return "addServices";
+        return "updateServices";
     }
 
     @GetMapping("/delete")
@@ -48,7 +48,7 @@ public class ServiceController {
     public String searchService(@RequestParam("keyword") String keyword, Model model) {
         List<Services> servicesList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/service/search?keyword=" + keyword, Services[].class));
         model.addAttribute("services", servicesList);
-        return "addServices";
+        return "searchServices";
     }
 
     @PostMapping

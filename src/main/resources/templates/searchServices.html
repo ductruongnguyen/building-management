@@ -89,30 +89,31 @@
                                             <div class="card-header chart-grid__header">
                                                 QUẢN LÝ DỊCH VỤ
                                             </div>
-                                            <!-- FORM!!!!!!! (SUA O DAY)-->
-                                            <form th:action="@{/service}" method="POST" th:object="${service}">
-                                                <table class="table table-striped">
-                                                    <tr>
-                                                        <td>Mã DV: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{MA_DV}" th:field="*{MA_DV}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Tên DV: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{TEN_DV}" th:field="*{TEN_DV}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Loại DV: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{LOAI_DV}" th:field="*{LOAI_DV}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Đơn giá: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{DON_GIA_CS}" th:field="*{DON_GIA_CS}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="2"><input class="btn btn-success" type="submit" value="Save"></td>
-                                                    </tr>
-                                                </table>
-                                            </form>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>TÊN</th>
+                                                    <th>LOẠI DỊCH VỤ</th>
+                                                    <th>ĐƠN GIÁ</th>
+                                                    <th>ACTION</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="service : ${services}">
+                                                    <td th:text="${service.getTEN_DV()}"></td>
+                                                    <td th:text="${service.getLOAI_DV()}"></td>
+                                                    <td th:text="${#numbers.formatDecimal(service.getDON_GIA_CS(), 0, 'COMMA', 0, 'POINT')}"></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-warning">
+                                                                <a style="color: white;text-decoration: none;"
+                                                                th:href="@{/service/update(trackingId=${service.getMA_DV()})}">Sửa</a></button>
+                                                        <button type="button" class="btn btn-danger">
+                                                                <a style="color: white;text-decoration: none;"
+                                                                th:href="@{/service/delete(trackingId=${service.getMA_DV()})}">Xóa</a></button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>

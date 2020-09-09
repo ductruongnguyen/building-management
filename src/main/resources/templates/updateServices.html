@@ -90,11 +90,11 @@
                                                 QUẢN LÝ DỊCH VỤ
                                             </div>
                                             <!-- FORM!!!!!!! (SUA O DAY)-->
-                                            <form th:action="@{/service}" method="POST" th:object="${service}">
+                                            <form th:action="@{/service/update}" method="POST" th:object="${service}">
                                                 <table class="table table-striped">
                                                     <tr>
                                                         <td>Mã DV: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{MA_DV}" th:field="*{MA_DV}"></td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_DV}" th:field="*{MA_DV}" readonly></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Tên DV: </td>
