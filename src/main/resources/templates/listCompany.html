@@ -3,28 +3,152 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>List Services</title>
+    <!-- Import thu vien -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{css/sb-admin-2.css}" rel="stylesheet" type="text/css">
 </head>
-<body>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>TÊN</th>
-        <th>SỐ NV</th>
-        <th>ACTION</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="company : ${companyList}">
-        <td th:text="${company.getTEN_CT()}"></td>
-        <td th:text="${company.getSO_NV()}"></td>
-        <td>
-            <button type="button" class="btn btn-warning">
-                <a style="color: black;text-decoration: none;"
-                   th:href="@{/company/bill(trackingId=${company.getMA_CT()})}">In hóa đơn</a></button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div th:insert="~{dashBoard::sidebar}"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Wrapper -->
+        <div id="content">
+            <!-- TOP BAR -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- MENU TOGGLE -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- TOPBAR - SEARCH (SUA SEARCH O DAY)-->
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/company/search}" method="GET">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" name="keyword">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- TOPBAR - USER'S AVATAR -->
+                <ul class="navbar-nav ml-auto">
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+                    <!-- USER'S AVATAR -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- USER'S NAME GET FROM SESSION -->
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${session.name}"></span>
+                            <img class="img-profile rounded-circle" src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png">
+                        </a>
+                        <!-- DROP LOGOUT -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- END OF TOP-BAR -->
+
+            <!-- MAIN TABLE HEREEEEEEEEEEEEEEEEEEEEE -->
+            <div class="main-content">
+                <div class="container-fluid content-top-gap">
+                    <!-- BREADCRUMB - (SUA DUONG DAN TONG HOP O DAY)-->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb my-breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company}">Quản lý công ty</a></li>
+                        </ol>
+                    </nav>
+                    <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
+                    <a type="button" class="btn btn-success" th:href="@{/company/add}">Thêm mới</a>
+                    <!-- TABLE!!!!!!! (SUA O DAY)-->
+                    <section class="template-cards">
+                        <div class="card card_border">
+                            <div class="card-body pb-0">
+                                <div class="row">
+                                    <div class="col-md-12  chart-grid">
+                                        <div class="card text-center card_border">
+                                            <div class="card-header chart-grid__header">
+                                                QUẢN LÝ CÔNG TY
+                                            </div>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>TÊN</th>
+                                                    <th>MST</th>
+                                                    <th>LĨNH VỰC</th>
+                                                    <th>ĐỊA CHỈ</th>
+                                                    <th>SĐT</th>
+                                                    <th>SỐ NV</th>
+                                                    <th>DIỆN TÍCH</th>
+                                                    <th>ACTION</th>
+                                                    <th>HÓA ĐƠN</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="company : ${companyList}">
+                                                    <td th:text="${company.getTEN_CT()}"></td>
+                                                    <td th:text="${company.getMST()}"></td>
+                                                    <td th:text="${company.getLINH_VUC()}"></td>
+                                                    <td th:text="${company.getDIA_CHI()}"></td>
+                                                    <td th:text="${company.getSDT()}"></td>
+                                                    <td th:text="${company.getSO_NV()}"></td>
+                                                    <td th:text="${company.getDIEN_TICH()}"></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-warning">
+                                                            <a style="color: white;text-decoration: none;"
+                                                               th:href="@{/company/update(trackingId=${company.getMA_CT()})}">Sửa</a></button>
+                                                        <button type="button" class="btn btn-danger">
+                                                            <a style="color: white;text-decoration: none;"
+                                                               th:href="@{/company/delete(trackingId=${company.getMA_CT()})}">Xóa</a></button>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-warning">
+                                                            <a style="color: black;text-decoration: none;"
+                                                               th:href="@{/company/bill(trackingId=${company.getMA_CT()})}">Hóa đơn DV</a></button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- MAIN TABLE END-->
+        </div>
+        <!-- END OF MAIN WRAPPER -->
+        <div th:insert="~{footer::footer}"></div>
+    </div>
+</div>
+<!-- END OF WRAPPER -->
+
+<!-- Import JS -->
+<script th:src="@{vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{js/sb-admin-2.min.js}"></script>
+
 </body>
 </html>

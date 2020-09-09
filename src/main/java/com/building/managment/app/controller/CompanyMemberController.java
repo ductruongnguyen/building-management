@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/company")
+@RequestMapping("/company-member")
 public class CompanyMemberController {
 
     RestTemplate rest = new RestTemplate();
