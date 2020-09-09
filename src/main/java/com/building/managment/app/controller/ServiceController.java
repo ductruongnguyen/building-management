@@ -18,7 +18,7 @@ public class ServiceController {
     RestTemplate rest = new RestTemplate();
 
     @GetMapping //List danh sách - Trang list
-    public String showServices(Model model) {
+    public String showList(Model model) {
         List<Services> servicesList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/service/all", Services[].class));
         System.out.println(servicesList);
         model.addAttribute("services", servicesList);
@@ -39,27 +39,27 @@ public class ServiceController {
     }
 
     @GetMapping("/delete") //Xóa Object
-    public String deleteService(@RequestParam("trackingId") String id) {
+    public String deleteObject(@RequestParam("trackingId") String id) {
         rest.delete("http://172.16.0.196:8080/service/{MA_DV}", id);
         return "redirect:/service";
     }
 
     @GetMapping("/search") //Tìm kiếm trả về object theo id - Trang search
-    public String searchService(@RequestParam("keyword") String keyword, Model model) {
+    public String searchObject(@RequestParam("keyword") String keyword, Model model) {
         List<Services> servicesList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/service/search?keyword=" + keyword, Services[].class));
         model.addAttribute("services", servicesList);
         return "searchServices";
     }
 
     @PostMapping //Insert Object xuống Database khi Add Object mới - Kết quả submit của trang add
-    public String addServices(Services service) {
+    public String savesaveObject(Services service) {
         System.out.println(service);
         rest.postForObject("http://172.16.0.196:8080/service", service, Services.class);
         return "redirect:/service";
     }
 
     @PostMapping("/update") //Update Object xuống Database khi update - Kết quả submit của trang update
-    public String updateServices(Services service) {
+    public String updateObject(Services service) {
         System.out.println(service);
         rest.put("http://172.16.0.196:8080/service/{MA_DV}", service, service.getMA_DV());
         return "redirect:/service";
