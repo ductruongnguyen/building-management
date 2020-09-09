@@ -12,12 +12,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/service")
+@RequestMapping("/service") //Đường dẫn tổng
 public class ServiceController {
 
     RestTemplate rest = new RestTemplate();
 
-    @GetMapping
+    @GetMapping //List danh sách - Trang list
     public String showServices(Model model) {
         List<Services> servicesList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/service/all", Services[].class));
         System.out.println(servicesList);
@@ -25,40 +25,40 @@ public class ServiceController {
         return "listServices";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/add") //Chuyển tới form add - Trang add
     public String showAddForm(Model model) {
         model.addAttribute("service", new Services());
         return "addServices";
     }
 
-    @GetMapping("/update")
+    @GetMapping("/update") //Chuyển tới form update - Trang update
     public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
         Services service = rest.getForObject("http://172.16.0.196:8080/service/{MA_DV}", Services.class, id);
         model.addAttribute("service", service);
         return "updateServices";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/delete") //Xóa Object
     public String deleteService(@RequestParam("trackingId") String id) {
         rest.delete("http://172.16.0.196:8080/service/{MA_DV}", id);
         return "redirect:/service";
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search") //Tìm kiếm trả về object theo id - Trang search
     public String searchService(@RequestParam("keyword") String keyword, Model model) {
         List<Services> servicesList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/service/search?keyword=" + keyword, Services[].class));
         model.addAttribute("services", servicesList);
         return "searchServices";
     }
 
-    @PostMapping
+    @PostMapping //Insert Object xuống Database khi Add Object mới - Kết quả submit của trang add
     public String addServices(Services service) {
         System.out.println(service);
         rest.postForObject("http://172.16.0.196:8080/service", service, Services.class);
         return "redirect:/service";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/update") //Update Object xuống Database khi update - Kết quả submit của trang update
     public String updateServices(Services service) {
         System.out.println(service);
         rest.put("http://172.16.0.196:8080/service/{MA_DV}", service, service.getMA_DV());
