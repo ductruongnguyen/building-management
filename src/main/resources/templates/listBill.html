@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>MÃ CT</th>
+        <th>TÊN CT</th>
+        <th>TÊN DV</th>
+        <th>NGÀY BD</th>
+        <th>NGÀY KT</th>
+        <th>ĐƠN GIÁ CS</th>
+        <th>MẶT BẰNG</th>
+        <th>THỰC TRẢ</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="comBill : ${billList}">
+        <td th:text="${comBill.getMA_CT()}"></td>
+        <td th:text="${comBill.getTEN_CT()}"></td>
+        <td th:text="${comBill.getTEN_DV()}"></td>
+        <td th:text="${comBill.getNGAY_BD()}"></td>
+        <td th:text="${comBill.getNGAY_KT()}"></td>
+        <td th:text="${comBill.getDON_GIA_CS()}"></td>
+        <td th:text="${comBill.getMAT_BANG()}"></td>
+        <td th:text="${comBill.getTHUC_TRA()}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

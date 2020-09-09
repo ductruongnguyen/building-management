@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>TÊN</th>
+        <th>SỐ NV</th>
+        <th>ACTION</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="company : ${companyList}">
+        <td th:text="${company.getTEN_CT()}"></td>
+        <td th:text="${company.getSO_NV()}"></td>
+        <td>
+            <button type="button" class="btn btn-warning">
+                <a style="color: black;text-decoration: none;"
+                   th:href="@{/company/bill(trackingId=${company.getMA_CT()})}">In hóa đơn</a></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
