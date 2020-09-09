@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Services</title>
+    <title>List Services</title>
     <!-- Import thu vien -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -21,6 +21,7 @@
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
+
         <!-- Main Wrapper -->
         <div id="content">
             <!-- TOP BAR -->
@@ -32,7 +33,7 @@
                 </button>
 
                 <!-- TOPBAR - SEARCH -->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/services/search}" method="GET">
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/service/search}" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" name="keyword">
                         <div class="input-group-append">
@@ -51,7 +52,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <!-- USER'S NAME GET FROM SESSION -->
-                            <span style="color:#ff0000 " class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${session.name}"></span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${session.name}"></span>
                             <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                         </a>
                         <!-- DROP LOGOUT -->
@@ -73,10 +74,11 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb my-breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/services}">Quản lý dịch vụ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/templates/service}">Quản lý dịch vụ</a></li>
                         </ol>
                     </nav>
-
+                    <!-- BUTTON THEM MOIIIIIIIIIIIII-->
+                    <a type="button" class="btn btn-primary" th:href="@{/service/add}">Thêm mới</a>
                     <!-- TABLE!!!!!!! -->
                     <section class="template-cards">
                         <div class="card card_border">
@@ -85,32 +87,33 @@
                                     <div class="col-md-12  chart-grid">
                                         <div class="card text-center card_border">
                                             <div class="card-header chart-grid__header">
-                                                THÊM MỚI DỊCH VỤ
+                                                QUẢN LÝ DỊCH VỤ
                                             </div>
-                                            <!-- FORM!!!!!!! -->
-                                            <form th:action="@{/services}" method="POST" th:object="${service}">
-                                                <table class="table table-striped">
-                                                    <tr>
-                                                        <td>Mã DV: </td>
-                                                        <td><input type="text" th:value="*{MA_DV}" th:field="*{MA_DV}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Tên DV: </td>
-                                                        <td><input type="text" th:value="*{TEN_DV}" th:field="*{TEN_DV}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Loại DV: </td>
-                                                        <td><input type="text" th:value="*{LOAI_DV}" th:field="*{LOAI_DV}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Đơn giá: </td>
-                                                        <td><input type="text" th:value="*{DON_GIA_CS}" th:field="*{DON_GIA_CS}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="2"><input type="submit" value="Save"></td>
-                                                    </tr>
-                                                </table>
-                                            </form>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>TÊN</th>
+                                                    <th>LOẠI DỊCH VỤ</th>
+                                                    <th>ĐƠN GIÁ</th>
+                                                    <th>ACTION</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="service : ${services}">
+                                                    <td th:text="${service.getTEN_DV()}"></td>
+                                                    <td th:text="${service.getLOAI_DV()}"></td>
+                                                    <td th:text="${service.getDON_GIA_CS()}"></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary">
+                                                            <a style="color: white;text-decoration: none;"
+                                                               th:href="@{/service/update(trackingId=${service.getMA_DV()})}">Sửa</a></button>
+                                                        <button type="button" class="btn btn-primary">
+                                                            <a style="color: white;text-decoration: none;"
+                                                               th:href="@{/service/delete(trackingId=${service.getMA_DV()})}">Xóa</a></button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>

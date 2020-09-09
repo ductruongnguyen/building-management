@@ -11,10 +11,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+
     @GetMapping
     public String index() {
         return "dashBoard";
     }
+
     @PostMapping
     public String loginSuccess(User user, HttpSession session) {
         session.setAttribute("name", user.getName());
