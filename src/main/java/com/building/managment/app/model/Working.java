@@ -7,14 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyBill {
-    private String MA_DK;
-    private String MA_CT;
-    private String TEN_CT;
-    private String TEN_DV;
+public class Working {
+    private int MA_LV;
+    private String MA_DV;
+    private String MA_NV;
+    private String VI_TRI;
+    private float RATE_LUONG;
     private String NGAY_BD;
     private String NGAY_KT;
-    private float DON_GIA_CS;
-    private double MAT_BANG;
-    private double THUC_TRA;
 }
