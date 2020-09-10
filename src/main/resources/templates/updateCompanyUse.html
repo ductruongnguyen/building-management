@@ -3,13 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List Services</title>
+    <title>Add Company</title>
     <!-- Import thu vien -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{css/sb-admin-2.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body id="page-top">
@@ -33,7 +33,7 @@
                 </button>
 
                 <!-- TOPBAR - SEARCH (SUA SEARCH O DAY)-->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/service/search}" method="GET">
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/company-use/search}" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" name="keyword">
                         <div class="input-group-append">
@@ -74,12 +74,10 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb my-breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/service}">Quản lý dịch vụ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company}">Quản lý công ty</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company-use}">Danh sách dịch vụ đã đăng ký</a></li>
                         </ol>
                     </nav>
-                    <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
-                    <a type="button" class="btn btn-success" th:href="@{/service/add}">Thêm mới Dịch vụ</a>
-                    <a type="button" class="btn btn-danger" th:href="@{/service-user}">Danh sách dịch vụ đã đăng ký</a>
                     <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">
@@ -88,33 +86,36 @@
                                     <div class="col-md-12  chart-grid">
                                         <div class="card text-center card_border">
                                             <div class="card-header chart-grid__header">
-                                                QUẢN LÝ DỊCH VỤ
+                                                UPDATE ĐĂNG KÝ DỊCH VỤ
                                             </div>
-                                            <table class="table table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th>TÊN</th>
-                                                    <th>LOẠI DỊCH VỤ</th>
-                                                    <th>ĐƠN GIÁ</th>
-                                                    <th>ACTION</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr th:each="service : ${servicesList}">
-                                                    <td th:text="${service.getTEN_DV()}"></td>
-                                                    <td th:text="${service.getLOAI_DV()}"></td>
-                                                    <td th:text="${#numbers.formatDecimal(service.getDON_GIA_CS(), 0, 'COMMA', 0, 'POINT')}"></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-warning">
-                                                                <a style="color: white;text-decoration: none;"
-                                                                th:href="@{/service/update(trackingId=${service.getMA_DV()})}">Sửa</a></button>
-                                                        <button type="button" class="btn btn-danger">
-                                                                <a style="color: white;text-decoration: none;"
-                                                                th:href="@{/service/delete(trackingId=${service.getMA_DV()})}">Xóa</a></button>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                            <!-- FORM!!!!!!! (SUA O DAY)-->
+                                            <form th:action="@{/company-use/update}" method="POST" th:object="${companyUse}">
+                                                <table class="table table-striped">
+                                                    <tr>
+                                                        <td>Mã DK: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_DK}" th:field="*{MA_DK}" readonly></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mã CT: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_CT}" th:field="*{MA_CT}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mã DV: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_DV}" th:field="*{MA_DV}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NGÀY BD: </td>
+                                                        <td><input placeholder="YY-MM-DD" class="form-control" type="text" th:value="*{NGAY_BD}" th:field="*{NGAY_BD}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NGÀY KT: </td>
+                                                        <td><input placeholder="YY-MM-DD" class="form-control" type="text" th:value="*{NGAY_KT}" th:field="*{NGAY_KT}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"><input class="btn btn-success" type="submit" value="Save"></td>
+                                                    </tr>
+                                                </table>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -132,10 +133,10 @@
 <!-- END OF WRAPPER -->
 
 <!-- Import JS -->
-<script th:src="@{vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
-<script th:src="@{js/sb-admin-2.min.js}"></script>
+<script th:src="@{../vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{../vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{../vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{../js/sb-admin-2.min.js}"></script>
 
 </body>
 </html>

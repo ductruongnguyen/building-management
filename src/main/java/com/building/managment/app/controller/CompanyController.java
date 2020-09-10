@@ -22,7 +22,7 @@ public class CompanyController {
 
     @GetMapping
     public String showServices(Model model) {
-        List<Company> companyList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/all", Company[].class));
+        List<Company> companyList = Arrays.asList(rest.getForObject("http://localhost:8080/company/all", Company[].class));
         System.out.println(companyList);
         model.addAttribute("companyList", companyList);
         return "listCompany";
@@ -36,27 +36,27 @@ public class CompanyController {
 
     @GetMapping("/update")
     public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
-        Company company = rest.getForObject("http://172.16.0.196:8080/company/{MA_CT}", Company.class, id);
+        Company company = rest.getForObject("http://localhost:8080/company/{MA_CT}", Company.class, id);
         model.addAttribute("company", company);
         return "updateCompany";
     }
 
     @GetMapping("/delete")
     public String deleteObject(@RequestParam("trackingId") String id) {
-        rest.delete("http://172.16.0.196:8080/company/{MA_CT}", id);
+        rest.delete("http://localhost:8080/company/{MA_CT}", id);
         return "redirect:/company";
     }
 
     @GetMapping("/search")
     public String searchObject(@RequestParam("keyword") String keyword, Model model) {
-        List<Company> companyList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/search?keyword=" + keyword, Company[].class));
+        List<Company> companyList = Arrays.asList(rest.getForObject("http://localhost:8080/company/search?keyword=" + keyword, Company[].class));
         model.addAttribute("companyList", companyList);
         return "searchCompany";
     }
 
     @GetMapping("/bill")
     public String showBill(@RequestParam("trackingId") String id, Model model) {
-        List<CompanyBill> billList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/bill/{MA_CT}", CompanyBill[].class, id));
+        List<CompanyBill> billList = Arrays.asList(rest.getForObject("http://localhost:8080/company/bill/{MA_CT}", CompanyBill[].class, id));
         model.addAttribute("billList", billList);
         model.addAttribute("MA_CT", id);
         double TONG_TIEN = 0;
@@ -73,7 +73,7 @@ public class CompanyController {
         System.out.println(startDate);
         System.out.println(endDate);
         System.out.println(maCT);
-        List<CompanyBill> billList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/bill/" + startDate + "/" + endDate + "/" + maCT, CompanyBill[].class));
+        List<CompanyBill> billList = Arrays.asList(rest.getForObject("http://localhost:8080/company/bill/" + startDate + "/" + endDate + "/" + maCT, CompanyBill[].class));
         model.addAttribute("billList", billList);
         model.addAttribute("MA_CT", maCT);
         double TONG_TIEN = 0;
@@ -87,7 +87,7 @@ public class CompanyController {
 
     @GetMapping("/list-member")
     public String listMem(@RequestParam("trackingId") String maCT, Model model) {
-        List<CompanyMember> companyMembers = Arrays.asList(rest.getForObject("http://172.16.0.196:8080//company-member/list-by-company?MA_CT=" + maCT, CompanyMember[].class));
+        List<CompanyMember> companyMembers = Arrays.asList(rest.getForObject("http://localhost:8080//company-member/list-by-company?MA_CT=" + maCT, CompanyMember[].class));
         model.addAttribute("companyMembers", companyMembers);
         return "listCompanyMember";
     }
@@ -95,13 +95,13 @@ public class CompanyController {
     @PostMapping
     public String addObject(Company company) {
         System.out.println(company);
-        rest.postForObject("http://172.16.0.196:8080/company", company, Company.class);
+        rest.postForObject("http://localhost:8080/company", company, Company.class);
         return "redirect:/company";
     }
 
     @PostMapping("/update")
     public String updateObject(Company company) {
-        rest.put("http://172.16.0.196:8080/company/{MA_CT}", company, company.getMA_CT());
+        rest.put("http://localhost:8080/company/{MA_CT}", company, company.getMA_CT());
         return "redirect:/company";
     }
 }

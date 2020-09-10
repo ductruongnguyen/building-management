@@ -3,13 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List Company</title>
+    <title>Add Company</title>
     <!-- Import thu vien -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{css/sb-admin-2.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body id="page-top">
@@ -75,11 +75,9 @@
                         <ol class="breadcrumb my-breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company}">Quản lý công ty</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company-use}">Danh sách dịch vụ đã đăng ký</a></li>
                         </ol>
                     </nav>
-                    <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
-                    <a type="button" class="btn btn-success" th:href="@{/company/add}">Thêm mới công ty</a>
-                    <a type="button" class="btn btn-danger" th:href="@{/company-use/add}">Đăng ký Sử dụng Dịch vụ</a>
                     <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">
@@ -88,53 +86,32 @@
                                     <div class="col-md-12  chart-grid">
                                         <div class="card text-center card_border">
                                             <div class="card-header chart-grid__header">
-                                                QUẢN LÝ CÔNG TY
+                                                ĐĂNG KÝ DỊCH VỤ MỚI
                                             </div>
-                                            <table class="table table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th>TÊN</th>
-                                                    <th>MST</th>
-                                                    <th>LĨNH VỰC</th>
-                                                    <th>ĐỊA CHỈ</th>
-                                                    <th>SĐT</th>
-                                                    <th>SỐ NV</th>
-                                                    <th>DIỆN TÍCH</th>
-                                                    <th>ACTION</th>
-                                                    <th>HÓA ĐƠN</th>
-                                                    <th>THÔNG TIN</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr th:each="company : ${companyList}">
-                                                    <td th:text="${company.getTEN_CT()}"></td>
-                                                    <td th:text="${company.getMST()}"></td>
-                                                    <td th:text="${company.getLINH_VUC()}"></td>
-                                                    <td th:text="${company.getDIA_CHI()}"></td>
-                                                    <td th:text="${company.getSDT()}"></td>
-                                                    <td th:text="${company.getSO_NV()}"></td>
-                                                    <td th:text="${company.getDIEN_TICH()}"></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-warning">
-                                                            <a style="color: white;text-decoration: none;"
-                                                               th:href="@{/company/update(trackingId=${company.getMA_CT()})}">Sửa</a></button>
-                                                        <button type="button" class="btn btn-danger">
-                                                            <a style="color: white;text-decoration: none;"
-                                                               th:href="@{/company/delete(trackingId=${company.getMA_CT()})}">Xóa</a></button>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-warning">
-                                                            <a style="color: black;text-decoration: none;"
-                                                               th:href="@{/company/bill(trackingId=${company.getMA_CT()})}">Hóa đơn DV</a></button>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-info">
-                                                        <a style="color: white;text-decoration: none;"
-                                                           th:href="@{/company/list-member(trackingId=${company.getMA_CT()})}">Xem chi tiết</a></button>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                            <!-- FORM!!!!!!! (SUA O DAY)-->
+                                            <form th:action="@{/company-use}" method="POST" th:object="${companyUse}">
+                                                <table class="table table-striped">
+                                                    <tr>
+                                                        <td>Mã CT: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_CT}" th:field="*{MA_CT}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mã DV: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_DV}" th:field="*{MA_DV}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NGÀY BD: </td>
+                                                        <td><input placeholder="YY-MM-DD" class="form-control" type="text" th:value="*{NGAY_BD}" th:field="*{NGAY_BD}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NGÀY KT: </td>
+                                                        <td><input placeholder="YY-MM-DD" class="form-control" type="text" th:value="*{NGAY_KT}" th:field="*{NGAY_KT}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"><input class="btn btn-success" type="submit" value="Save"></td>
+                                                    </tr>
+                                                </table>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -152,10 +129,10 @@
 <!-- END OF WRAPPER -->
 
 <!-- Import JS -->
-<script th:src="@{vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
-<script th:src="@{js/sb-admin-2.min.js}"></script>
+<script th:src="@{../vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{../vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{../vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{../js/sb-admin-2.min.js}"></script>
 
 </body>
 </html>

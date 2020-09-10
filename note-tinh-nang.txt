@@ -14,9 +14,9 @@ Check ra vào - done
 
 Đăng ký thẻ - done
 
-Đăng ký Dịch vụ - thiếu bảng đăng ký sử dụng dịch vụ
+Đăng ký Dịch vụ - doing
 
-Đăng ký làm việc - doing
+Đăng ký làm việc
 
 Lọc thông tin ra vào theo mã nhân viên
 
