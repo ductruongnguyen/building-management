@@ -49,7 +49,7 @@ public class CompanyController {
     @GetMapping("/bill")
     public String showBill(@RequestParam("trackingId") String id, Model model) {
         List<CompanyBill> billList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/bill/{MA_CT}", CompanyBill[].class, id));
-        System.out.println(billList);
+//        System.out.println(billList);
         model.addAttribute("billList", billList);
         model.addAttribute("MA_CT", id);
         return "listBill";
@@ -60,6 +60,17 @@ public class CompanyController {
         List<Company> companyList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/search?keyword=" + keyword, Company[].class));
         model.addAttribute("companyList", companyList);
         return "/company/listCompany";
+    }
+
+    @GetMapping("/filter")
+    public String filterBill(@RequestParam("startDate")String startDate, @RequestParam("endDate")String endDate, @RequestParam("trackingId")String maCT, Model model) {
+        System.out.println(startDate);
+        System.out.println(endDate);
+        System.out.println(maCT);
+        List<CompanyBill> billList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/bill/" + startDate + "/" + endDate + "/" + maCT, CompanyBill[].class));
+        model.addAttribute("billList", billList);
+        model.addAttribute("MA_CT", maCT);
+        return "filterBill";
     }
 
     @PostMapping
@@ -73,16 +84,6 @@ public class CompanyController {
     public String updateServices(Services service) {
         System.out.println(service);
         rest.put("http://172.16.0.196:8080/company/{MA_CT}", service, service.getMA_DV());
-        return "redirect:/company";
-    }
-
-    @PostMapping("/filter")
-    public String filterBill(@RequestParam("startDate")String startDate, @RequestParam("endDate")String endDate, @RequestParam("MA_CT")String maCT) {
-//        rest.put("http://172.16.0.196:8080/company/{MA_CT}", service, service.getMA_DV());
-
-        System.out.println(startDate);
-        System.out.println(endDate);
-        System.out.println(maCT);
         return "redirect:/company";
     }
 }

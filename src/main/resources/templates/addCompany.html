@@ -10,7 +10,6 @@
     <link th:href="@{../vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
     <link th:href="@{../css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
     <link th:href="@{../css/sb-admin-2.css}" rel="stylesheet" type="text/css">
-
 </head>
 
 <body id="page-top">
@@ -34,7 +33,7 @@
                 </button>
 
                 <!-- TOPBAR - SEARCH (SUA SEARCH O DAY)-->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/company/search}" method="GET">
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/service/search}" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" name="keyword">
                         <div class="input-group-append">
@@ -75,26 +74,11 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb my-breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company}">Quản lý công ty</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/service}">Quản lý dịch vụ</a></li>
                         </ol>
                     </nav>
-
-                    <!-- BỘ LỌC HÓA ĐƠN THEO NGÀY THÁNG VÀ MA_CT (SUA O DAY)-->
-                    <form class="row" th:action="@{/company/filter}" method="get">
-                        <div class="form-group col-xl-3" style="display: inline-block; float: left">
-                            <label for="start">Start Date:</label>
-                            <input name="startDate" type="date" class="form-control" id="start" placeholder="YY-MM-DD" value="2020-09-10" min="2019-01-01" max="2030-01-01">
-                        </div>
-                        <div class="form-group col-xl-3" style="display: inline-block; float: left">
-                            <label for="end">End Date:</label>
-                            <input name="endDate" type="date" class="form-control" id="end" placeholder="YY-MM-DD" value="2020-09-10" min="2019-01-01" max="2030-01-01">
-                        </div>
-                        <input type="hidden" th:value="${MA_CT}" th:name="trackingId">
-                        <div class="form-group col-xl-3" style="float: left">
-                            <input style="margin-top: 30px" type="submit" class="btn btn-success" value="Submit">
-                        </div>
-                    </form>
-
+                    <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
+                    <a type="button" class="btn btn-success" th:href="@{/service/add}">Thêm mới</a>
                     <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">
@@ -103,28 +87,32 @@
                                     <div class="col-md-12  chart-grid">
                                         <div class="card text-center card_border">
                                             <div class="card-header chart-grid__header">
-                                                QUẢN LÝ BILL
+                                                QUẢN LÝ DỊCH VỤ
                                             </div>
-                                            <table class="table table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th>TÊN DV</th>
-                                                    <th>NGÀY BD</th>
-                                                    <th>NGÀY KT</th>
-                                                    <th>ĐƠN GIÁ CS</th>
-                                                    <th>THỰC TRẢ</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr th:each="comBill : ${billList}">
-                                                    <td th:text="${comBill.getTEN_DV()}"></td>
-                                                    <td th:text="${comBill.getNGAY_BD()}"></td>
-                                                    <td th:text="${comBill.getNGAY_KT()}"></td>
-                                                    <td th:text="${#numbers.formatDecimal(comBill.getDON_GIA_CS(), 0, 'COMMA', 0, 'POINT')}"></td>
-                                                    <td th:text="${#numbers.formatDecimal(comBill.getTHUC_TRA(), 0, 'COMMA', 0, 'POINT')}"></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                            <!-- FORM!!!!!!! (SUA O DAY)-->
+                                            <form th:action="@{/service}" method="POST" th:object="${service}">
+                                                <table class="table table-striped">
+                                                    <tr>
+                                                        <td>Mã DV: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_DV}" th:field="*{MA_DV}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tên DV: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{TEN_DV}" th:field="*{TEN_DV}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Loại DV: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{LOAI_DV}" th:field="*{LOAI_DV}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Đơn giá: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{DON_GIA_CS}" th:field="*{DON_GIA_CS}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"><input class="btn btn-success" type="submit" value="Save"></td>
+                                                    </tr>
+                                                </table>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
