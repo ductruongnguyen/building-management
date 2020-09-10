@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List Building Member</title>
+    <title>List Services</title>
     <!-- Import thu vien -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -33,7 +33,7 @@
                 </button>
 
                 <!-- TOPBAR - SEARCH (SUA SEARCH O DAY)-->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/buildingmember/search}" method="GET">
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/company/search}" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" name="keyword">
                         <div class="input-group-append">
@@ -53,7 +53,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <!-- USER'S NAME GET FROM SESSION -->
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${session.name}"></span>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            <img class="img-profile rounded-circle" src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png">
                         </a>
                         <!-- DROP LOGOUT -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -74,11 +74,11 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb my-breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/building-member}">Quản Lý Nhân Viên Tòa Nhà</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company}">Quản lý công ty</a></li>
                         </ol>
                     </nav>
                     <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
-                    <a type="button" class="btn btn-success" th:href="@{/building-member/add}">Thêm mới</a>
+                    <a type="button" class="btn btn-success" th:href="@{/company/add}">Thêm mới</a>
                     <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">
@@ -87,36 +87,47 @@
                                     <div class="col-md-12  chart-grid">
                                         <div class="card text-center card_border">
                                             <div class="card-header chart-grid__header">
-                                                QUẢN LÝ NHÂN VIÊN TÒA NHÀ
+                                                QUẢN LÝ CÔNG TY
                                             </div>
-                                            <!-- FORM!!!!!!! (SUA O DAY)-->
-                                            <form th:action="@{/building-member}" method="POST" th:object="${buildingmember}">
-                                                <table class="table table-striped">
-                                                    <tr>
-                                                        <td>Mã NV: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{MA_NV}" th:field="*{MA_NV}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Tên NV: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{TEN}" th:field="*{TEN}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>NGÀY SINH: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{NS}" th:field="*{NS}" placeholder="YY-MM-DD"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>ĐỊA CHỈ: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{DIA_CHI}" th:field="*{DIA_CHI}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>SỐ ĐIỆN THOẠI: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{SDT}" th:field="*{SDT}"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="2"><input class="btn btn-success" type="submit" value="Save"></td>
-                                                    </tr>
-                                                </table>
-                                            </form>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>TÊN</th>
+                                                    <th>MST</th>
+                                                    <th>LĨNH VỰC</th>
+                                                    <th>ĐỊA CHỈ</th>
+                                                    <th>SĐT</th>
+                                                    <th>SỐ NV</th>
+                                                    <th>DIỆN TÍCH</th>
+                                                    <th>ACTION</th>
+                                                    <th>HÓA ĐƠN</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="company : ${companyList}">
+                                                    <td th:text="${company.getTEN_CT()}"></td>
+                                                    <td th:text="${company.getMST()}"></td>
+                                                    <td th:text="${company.getLINH_VUC()}"></td>
+                                                    <td th:text="${company.getDIA_CHI()}"></td>
+                                                    <td th:text="${company.getSDT()}"></td>
+                                                    <td th:text="${company.getSO_NV()}"></td>
+                                                    <td th:text="${company.getDIEN_TICH()}"></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-warning">
+                                                            <a style="color: white;text-decoration: none;"
+                                                               th:href="@{/company/update(trackingId=${company.getMA_CT()})}">Sửa</a></button>
+                                                        <button type="button" class="btn btn-danger">
+                                                            <a style="color: white;text-decoration: none;"
+                                                               th:href="@{/company/delete(trackingId=${company.getMA_CT()})}">Xóa</a></button>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-warning">
+                                                            <a style="color: black;text-decoration: none;"
+                                                               th:href="@{/company/bill(trackingId=${company.getMA_CT()})}">Hóa đơn DV</a></button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>

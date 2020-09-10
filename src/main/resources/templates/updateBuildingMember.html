@@ -90,11 +90,11 @@
                                                 QUẢN LÝ NHÂN VIÊN TÒA NHÀ
                                             </div>
                                             <!-- FORM!!!!!!! (SUA O DAY)-->
-                                            <form th:action="@{/buildingMember}" method="POST" th:object="${buildingmember}">
+                                            <form th:action="@{/building-member/update}" method="POST" th:object="${buildingmember}">
                                                 <table class="table table-striped">
                                                     <tr>
                                                         <td>Mã NV: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{MA_NV}" th:field="*{MA_NV}"></td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_NV}" th:field="*{MA_NV}" readonly></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Tên NV: </td>
@@ -102,7 +102,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>NGÀY SINH: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{NS}" th:field="*{NS}"></td>
+                                                        <td><input class="form-control" type="text" th:value="*{NS}" th:field="*{NS}" placeholder="YY-MM-DD"></td>
                                                     </tr>
                                                     <tr>
                                                         <td>ĐỊA CHỈ: </td>

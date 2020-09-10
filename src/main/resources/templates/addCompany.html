@@ -33,7 +33,7 @@
                 </button>
 
                 <!-- TOPBAR - SEARCH (SUA SEARCH O DAY)-->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/service/search}" method="GET">
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/company/search}" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" name="keyword">
                         <div class="input-group-append">
@@ -78,7 +78,7 @@
                         </ol>
                     </nav>
                     <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
-                    <a type="button" class="btn btn-success" th:href="@{/service/add}">Thêm mới</a>
+                    <a type="button" class="btn btn-success" th:href="@{/company/add}">Thêm mới</a>
                     <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">
@@ -87,26 +87,42 @@
                                     <div class="col-md-12  chart-grid">
                                         <div class="card text-center card_border">
                                             <div class="card-header chart-grid__header">
-                                                QUẢN LÝ DỊCH VỤ
+                                                THÊM MỚI DỊCH VỤ
                                             </div>
                                             <!-- FORM!!!!!!! (SUA O DAY)-->
-                                            <form th:action="@{/service}" method="POST" th:object="${service}">
+                                            <form th:action="@{/company}" method="POST" th:object="${company}">
                                                 <table class="table table-striped">
                                                     <tr>
-                                                        <td>Mã DV: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{MA_DV}" th:field="*{MA_DV}"></td>
+                                                        <td>Mã CT: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_CT}" th:field="*{MA_CT}"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Tên DV: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{TEN_DV}" th:field="*{TEN_DV}"></td>
+                                                        <td>Tên CT: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{TEN_CT}" th:field="*{TEN_CT}"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Loại DV: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{LOAI_DV}" th:field="*{LOAI_DV}"></td>
+                                                        <td>MST: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MST}" th:field="*{MST}"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Đơn giá: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{DON_GIA_CS}" th:field="*{DON_GIA_CS}"></td>
+                                                        <td>LĨNH VỰC: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{LINH_VUC}" th:field="*{LINH_VUC}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ĐỊA CHỈ: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{DIA_CHI}" th:field="*{DIA_CHI}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>SĐT: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{SDT}" th:field="*{SDT}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>SỐ NV: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{SO_NV}" th:field="*{SO_NV}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>DIỆN TÍCH: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{DIEN_TICH}" th:field="*{DIEN_TICH}"></td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2"><input class="btn btn-success" type="submit" value="Save"></td>

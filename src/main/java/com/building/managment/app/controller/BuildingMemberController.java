@@ -1,7 +1,6 @@
 package com.building.managment.app.controller;
 
 import com.building.managment.app.model.BuildingMember;
-import com.building.managment.app.model.Services;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +20,7 @@ public class BuildingMemberController {
 
     @GetMapping
     public String showServices(Model model) {
-        List<BuildingMember> buildingmemberList = Arrays.asList(rest.getForObject("http://localhost:8080/building-member/all", BuildingMember[].class));
+        List<BuildingMember> buildingmemberList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/building-member/all", BuildingMember[].class));
         System.out.println(buildingmemberList);
         model.addAttribute("buildingmemberList", buildingmemberList);
         return "listBuildingMember";
@@ -35,35 +34,34 @@ public class BuildingMemberController {
 
     @GetMapping("/update")
     public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
-        BuildingMember buildingmember = rest.getForObject("http://localhost:8080/building-member/{MA_NV}", BuildingMember.class, id);
+        BuildingMember buildingmember = rest.getForObject("http://172.16.0.196:8080/building-member/{MA_NV}", BuildingMember.class, id);
         model.addAttribute("buildingmember", buildingmember);
         return "updateBuildingMember";
     }
 
     @GetMapping("/delete")
     public String deleteService(@RequestParam("trackingId") String id) {
-        rest.delete("http://localhost:8080/building-member/{MA_NV}", id);
+        rest.delete("http://172.16.0.196:8080/building-member/{MA_NV}", id);
         return "redirect:/building-member";
     }
 
     @GetMapping("/search")
     public String searchService(@RequestParam("keyword") String keyword, Model model) {
-        List<BuildingMember> buildingmemberList = Arrays.asList(rest.getForObject("http://localhost:8080/building-member/search?keyword=" + keyword, BuildingMember[].class));
+        List<BuildingMember> buildingmemberList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/building-member/search?keyword=" + keyword, BuildingMember[].class));
         model.addAttribute("buildingmemberList", buildingmemberList);
         return "searchBuildingMember";
     }
 
     @PostMapping
     public String addServices(BuildingMember buildingmember) {
-        System.out.println(buildingmember);
-        rest.postForObject("http://localhost:8080/building-member", buildingmember, BuildingMember.class);
+        rest.postForObject("http://172.16.0.196:8080/building-member", buildingmember, BuildingMember.class);
         return "redirect:/building-member";
     }
 
     @PostMapping("/update")
     public String updateServices(BuildingMember buildingmember) {
         System.out.println(buildingmember);
-        rest.put("http://localhost:8080/building-member/{MA_NV}", buildingmember, buildingmember.getMA_NV());
+        rest.put("http://172.16.0.196:8080/building-member/{MA_NV}", buildingmember, buildingmember.getMA_NV());
         return "redirect:/building-member";
     }
 }
