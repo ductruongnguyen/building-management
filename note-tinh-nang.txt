@@ -1,0 +1,27 @@
+http://localhost:8081/company/filter?startDate=2020-12-10&endDate=2023-12-10&trackingId=CT01
+
+- Thực hiện các chức năng thêm/xoá/sửa/tìm kiếm các đối tượng trong hệ thống như công ty, nhân viên công ty, nhân viên toà nhà, dịch vụ toà nhà v.v. với các ràng buộc được nêu như trong CSDL.
+
+- Kiểm tra thông tin của mỗi nhân viên của các công ty cùng với số lần và vị trí ra/vào toà nhà trong ngày của họ. (doing)
+
+- Liệt kê thông tin của các công ty cùng với tổng số tiền mỗi tháng tính đến thời điểm hiện tại mà các công ty phải trả bao gồm tiền thuê mặt bằng (diện tích mặt bằng nhân đơn giá) và tổng tiền dịch vụ. Danh sách công ty được sắp xếp theo thứ tự giảm dần các chi phí. (done)
+
+- Liệt kê thông tin của các nhân viên toà nhà cùng lương tháng của họ. Một nhân viên toà nhà có thể đổi vị trí (bậc công việc, và tên dịch vụ) làm việc theo mỗi tháng khác nhau. (tối sửa lại...)
+
+---- 
+
+Check ra vào - done
+
+Đăng ký thẻ - done
+
+Đăng ký Dịch vụ - thiếu bảng đăng ký sử dụng dịch vụ
+
+Đăng ký làm việc - doing
+
+Lọc thông tin ra vào theo mã nhân viên
+
+----
+
+Validate khi Add nhân viên
+
+Delete không được
