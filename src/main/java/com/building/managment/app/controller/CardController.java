@@ -30,15 +30,15 @@ public class CardController {
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        model.addAttribute("company", new Card());
-        return "/card/addCard";
+        model.addAttribute("cards", new Card());
+        return "addCard";
     }
 
     @GetMapping("/update")
     public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
         Card card = rest.getForObject("http://localhost:8080/card/{MA_CT}", Card.class, id);
         model.addAttribute("card", card);
-        return "/card/updateCard";
+        return "updateCard";
     }
 
     @GetMapping("/delete")
@@ -50,21 +50,21 @@ public class CardController {
     @GetMapping("/search")
     public String searchService(@RequestParam("keyword") String keyword, Model model) {
         List<Card> cardList = Arrays.asList(rest.getForObject("http://localhost:8080/card/search?keyword=" + keyword, Card[].class));
-        model.addAttribute("companyList", cardList);
-        return "/card/listCard";
+        model.addAttribute("cardList", cardList);
+        return "searchCard";
     }
 
     @PostMapping
     public String addServices(Card card) {
         System.out.println(card);
-        rest.postForObject("http://localhost:8080/card", card, Company.class);
+        rest.postForObject("http://localhost:8080/card", card, Card.class);
         return "redirect:/card";
     }
 
     @PostMapping("/update")
-    public String updateServices(Services service) {
-        System.out.println(service);
-        rest.put("http://localhost:8080/card/{MA_CT}", service, service.getMA_DV());
+    public String updateServices(Card card) {
+        System.out.println(card);
+        rest.put("http://localhost:8080/card/{MA_CT}", card, card.getMA_THE());
         return "redirect:/card";
     }
 }

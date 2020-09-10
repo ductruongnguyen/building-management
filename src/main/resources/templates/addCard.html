@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Services</title>
+    <!-- Import thu vien -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link th:href="@{../vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div th:insert="~{dashBoard::sidebar}"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Wrapper -->
+        <div id="content">
+            <!-- TOP BAR -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- MENU TOGGLE -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- TOPBAR - SEARCH (SUA SEARCH O DAY)-->
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/card/search}" method="GET">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" name="keyword">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- TOPBAR - USER'S AVATAR -->
+                <ul class="navbar-nav ml-auto">
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+                    <!-- USER'S AVATAR -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- USER'S NAME GET FROM SESSION -->
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${session.name}"></span>
+                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                        </a>
+                        <!-- DROP LOGOUT -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- END OF TOP-BAR -->
+
+            <!-- MAIN TABLE HEREEEEEEEEEEEEEEEEEEEEE -->
+            <div class="main-content">
+                <div class="container-fluid content-top-gap">
+                    <!-- BREADCRUMB - (SUA DUONG DAN TONG HOP O DAY)-->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb my-breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/card}">Thẻ Ra-Vào</a></li>
+                        </ol>
+                    </nav>
+                    <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
+                    <a type="button" class="btn btn-success" th:href="@{/card/add}">Thêm mới</a>
+                    <!-- TABLE!!!!!!! (SUA O DAY)-->
+                    <section class="template-cards">
+                        <div class="card card_border">
+                            <div class="card-body pb-0">
+                                <div class="row">
+                                    <div class="col-md-12  chart-grid">
+                                        <div class="card text-center card_border">
+                                            <div class="card-header chart-grid__header">
+                                                THẺ RA-VÀO
+                                            </div>
+                                            <!-- FORM!!!!!!! (SUA O DAY)-->
+                                            <form th:action="@{/card}" method="POST" th:object="${cards}">
+                                                <table class="table table-striped">
+                                                    <tr>
+                                                        <td>Mã THẺ: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_THE}" th:field="*{MA_THE}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>MÃ NV: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_NV}" th:field="*{MA_NV}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"><input class="btn btn-success" type="submit" value="Save"></td>
+                                                    </tr>
+                                                </table>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- MAIN TABLE END-->
+        </div>
+        <!-- END OF MAIN WRAPPER -->
+        <div th:insert="~{footer::footer}"></div>
+    </div>
+</div>
+<!-- END OF WRAPPER -->
+
+<!-- Import JS -->
+<script th:src="@{../vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{../vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{../vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{../js/sb-admin-2.min.js}"></script>
+
+</body>
+</html>
