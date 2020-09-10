@@ -31,14 +31,14 @@ public class CardController {
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("company", new Card());
-        return "/card/addCompany";
+        return "/card/addCard";
     }
 
     @GetMapping("/update")
     public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
-        Company company = rest.getForObject("http://localhost:8080/card/{MA_CT}", Company.class, id);
-        model.addAttribute("company", company);
-        return "/card/updateCompany";
+        Card card = rest.getForObject("http://localhost:8080/card/{MA_CT}", Card.class, id);
+        model.addAttribute("card", card);
+        return "/card/updateCard";
     }
 
     @GetMapping("/delete")
@@ -49,15 +49,15 @@ public class CardController {
 
     @GetMapping("/search")
     public String searchService(@RequestParam("keyword") String keyword, Model model) {
-        List<Company> companyList = Arrays.asList(rest.getForObject("http://localhost:8080/card/search?keyword=" + keyword, Company[].class));
-        model.addAttribute("companyList", companyList);
-        return "/card/listCompany";
+        List<Card> cardList = Arrays.asList(rest.getForObject("http://localhost:8080/card/search?keyword=" + keyword, Card[].class));
+        model.addAttribute("companyList", cardList);
+        return "/card/listCard";
     }
 
     @PostMapping
-    public String addServices(Company company) {
-        System.out.println(company);
-        rest.postForObject("http://localhost:8080/card", company, Company.class);
+    public String addServices(Card card) {
+        System.out.println(card);
+        rest.postForObject("http://localhost:8080/card", card, Company.class);
         return "redirect:/card";
     }
 
