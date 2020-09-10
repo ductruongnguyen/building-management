@@ -33,14 +33,14 @@ public class CompanyMemberController {
 
     @GetMapping("/update") //Chuyển tới form update - Trang update
     public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
-        CompanyMember companymember = rest.getForObject("http://172.16.0.196:8080/company-member/{MA_DV}", CompanyMember.class, id);
+        CompanyMember companymember = rest.getForObject("http://172.16.0.196:8080/company-member/{MA_NV}", CompanyMember.class, id);
         model.addAttribute("companymember", companymember);
         return "updateCompanyMember";
     }
 
     @GetMapping("/delete") //Xóa Object
     public String deleteObject(@RequestParam("trackingId") String id) {
-        rest.delete("http://172.16.0.196:8080/company-member/{MA_DV}", id);
+        rest.delete("http://172.16.0.196:8080/company-member/{MA_NV}", id);
         return "redirect:/company-member"; //ve duong dan tong tuong ung
     }
 
@@ -61,7 +61,7 @@ public class CompanyMemberController {
     @PostMapping("/update") //Update Object xuống Database khi update - Kết quả submit của trang update
     public String updateObject(CompanyMember companymember) {
         System.out.println(companymember);
-        rest.put("http://172.16.0.196:8080/company-member/{MA_DV}", companymember, companymember.getMA_NV());
+        rest.put("http://172.16.0.196:8080/company-member/{MA_NV}", companymember, companymember.getMA_NV());
         return "redirect:/company-member";
     }
 }

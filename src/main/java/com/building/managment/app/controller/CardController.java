@@ -36,14 +36,14 @@ public class CardController {
 
     @GetMapping("/update")
     public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
-        Card card = rest.getForObject("http://localhost:8080/card/{MA_CT}", Card.class, id);
+        Card card = rest.getForObject("http://localhost:8080/card/{MA_THE}", Card.class, id);
         model.addAttribute("card", card);
         return "updateCard";
     }
 
     @GetMapping("/delete")
     public String deleteService(@RequestParam("trackingId") String id) {
-        rest.delete("http://localhost:8080/card/{MA_CT}", id);
+        rest.delete("http://localhost:8080/card/{MA_THE}", id);
         return "redirect:/card";
     }
 
@@ -64,7 +64,7 @@ public class CardController {
     @PostMapping("/update")
     public String updateServices(Card card) {
         System.out.println(card);
-        rest.put("http://localhost:8080/card/{MA_CT}", card, card.getMA_THE());
+        rest.put("http://localhost:8080/card/{MA_THE}", card, card.getMA_THE());
         return "redirect:/card";
     }
 }
