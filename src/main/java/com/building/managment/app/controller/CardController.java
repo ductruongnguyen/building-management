@@ -1,5 +1,6 @@
 package com.building.managment.app.controller;
 
+import com.building.managment.app.model.Card;
 import com.building.managment.app.model.Company;
 import com.building.managment.app.model.Services;
 import org.springframework.stereotype.Controller;
@@ -21,15 +22,15 @@ public class CardController {
 
     @GetMapping
     public String showServices(Model model) {
-        List<Company> companyList = Arrays.asList(rest.getForObject("http://localhost:8080/card/all", Company[].class));
-        System.out.println(companyList);
-        model.addAttribute("companyList", companyList);
+        List<Card> cardList = Arrays.asList(rest.getForObject("http://localhost:8080/card/all", Card[].class));
+        System.out.println(cardList);
+        model.addAttribute("cardList", cardList);
         return "listCard";
     }
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        model.addAttribute("company", new Company());
+        model.addAttribute("company", new Card());
         return "/card/addCompany";
     }
 

@@ -3,13 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List Building Member</title>
+    <title>List Services</title>
     <!-- Import thu vien -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{css/sb-admin-2.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body id="page-top">
@@ -53,7 +53,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <!-- USER'S NAME GET FROM SESSION -->
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${session.name}"></span>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            <img class="img-profile rounded-circle" src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png">
                         </a>
                         <!-- DROP LOGOUT -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -89,33 +89,38 @@
                                             <div class="card-header chart-grid__header">
                                                 NHÂN VIÊN CÔNG TY
                                             </div>
-                                            <table class="table table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th>TÊN NHÂN VIÊN</th>
-                                                    <th>NGÀY SINH</th>
-                                                    <th>CMT</th>
-                                                    <th>SỐ ĐIỆN THOẠI</th>
-                                                    <th>ACTION</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr th:each="CompanyMember : ${companyMemberList}">
-                                                    <td th:text="${CompanyMember.getTEN()}"></td>
-                                                    <td th:text="${CompanyMember.getNGAY_SINH()}"></td>
-                                                    <td th:text="${CompanyMember.getCMT()}"></td>
-                                                    <td th:text="${CompanyMember.getSDT()}"></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-warning">
-                                                                <a style="color: white;text-decoration: none;"
-                                                                th:href="@{/CompanyMember/update(trackingId=${CompanyMember.getMA_NV()})}">Sửa</a></button>
-                                                        <button type="button" class="btn btn-danger">
-                                                                <a style="color: white;text-decoration: none;"
-                                                                th:href="@{/CompanyMember/delete(trackingId=${CompanyMember.getMA_NV()})}">Xóa</a></button>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                            <!-- FORM!!!!!!! (SUA O DAY)-->
+                                            <form th:action="@{/companyMember}" method="POST" th:object="${companymember}">
+                                                <table class="table table-striped">
+                                                    <tr>
+                                                        <td>Mã NV: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_NV}" th:field="*{MA_NV}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>MA CT: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_CT}" th:field="*{MA_CT}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>TÊN NV: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{TEN}" th:field="*{TEN}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NGÀY SINH: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{NGAY_SINH}" th:field="*{NGAY_SINH}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>CMT: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{CMT}" th:field="*{CMT}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>SDT: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{SDT}" th:field="*{SDT}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"><input class="btn btn-success" type="submit" value="Save"></td>
+                                                    </tr>
+                                                </table>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -133,10 +138,10 @@
 <!-- END OF WRAPPER -->
 
 <!-- Import JS -->
-<script th:src="@{vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
-<script th:src="@{js/sb-admin-2.min.js}"></script>
+<script th:src="@{../vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{../vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{../vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{../js/sb-admin-2.min.js}"></script>
 
 </body>
 </html>
