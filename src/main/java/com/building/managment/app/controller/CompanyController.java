@@ -77,11 +77,12 @@ public class CompanyController {
     }
 
     @PostMapping("/filter")
-    public String filterBill(@RequestParam("startDate")String startDate, @RequestParam("endDate")String endDate) {
+    public String filterBill(@RequestParam("startDate")String startDate, @RequestParam("endDate")String endDate, @RequestParam("MA_CT")String maCT) {
 //        rest.put("http://172.16.0.196:8080/company/{MA_CT}", service, service.getMA_DV());
 
         System.out.println(startDate);
         System.out.println(endDate);
+        System.out.println(maCT);
         return "redirect:/company";
     }
 }
