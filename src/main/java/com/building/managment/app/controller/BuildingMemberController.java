@@ -61,9 +61,9 @@ public class BuildingMemberController {
     }
 
     @PostMapping("/update")
-    public String updateServices(Services service) {
-        System.out.println(service);
-        rest.put("http://localhost:8080/building-member/{MA_NV}", service, service.getMA_DV());
+    public String updateServices(BuildingMember buildingmember) {
+        System.out.println(buildingmember);
+        rest.put("http://localhost:8080/building-member/{MA_NV}", buildingmember, buildingmember.getMA_NV());
         return "redirect:/building-member";
     }
 }
