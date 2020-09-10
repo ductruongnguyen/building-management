@@ -24,7 +24,7 @@ public class CardController {
         List<Company> companyList = Arrays.asList(rest.getForObject("http://localhost:8080/card/all", Company[].class));
         System.out.println(companyList);
         model.addAttribute("companyList", companyList);
-        return "/card/listCompany";
+        return "listCard";
     }
 
     @GetMapping("/add")

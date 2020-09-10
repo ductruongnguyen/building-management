@@ -1,7 +1,6 @@
 package com.building.managment.app.controller;
 
-import com.building.managment.app.model.Company;
-import com.building.managment.app.model.Services;
+import com.building.managment.app.model.CompanyMember;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,61 +8,60 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/company")
+@RequestMapping("/company-member") //Đường dẫn tổng - Can phai doi
 public class CompanyMemberController {
 
     RestTemplate rest = new RestTemplate();
 
-    @GetMapping
-    public String showServices(Model model) {
-        List<Company> companyList = Arrays.asList(rest.getForObject("http://localhost:8080/company/all", Company[].class));
-        System.out.println(companyList);
-        model.addAttribute("companyList", companyList);
-        return "/company/listCompany";
+    @GetMapping //List danh sách - Trang list
+    public String showList(Model model) {
+        List<CompanyMember> companyMemberList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company-member/all", CompanyMember[].class));
+        System.out.println(companyMemberList);
+        model.addAttribute("companyMemberList", companyMemberList);
+        return "listCompanyMember"; //phai doi
     }
 
-    @GetMapping("/add")
+    @GetMapping("/add") //Chuyển tới form add - Trang add
     public String showAddForm(Model model) {
-        model.addAttribute("company", new Company());
-        return "/company/addCompany";
+        model.addAttribute("CompanyMember", new CompanyMember());
+        return "addCompanyMember";
     }
 
-    @GetMapping("/update")
+    @GetMapping("/update") //Chuyển tới form update - Trang update
     public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
-        Company company = rest.getForObject("http://localhost:8080/company/{MA_CT}", Company.class, id);
-        model.addAttribute("company", company);
-        return "/company/updateCompany";
+        CompanyMember CompanyMember = rest.getForObject("http://172.16.0.196:8080/company-member/{MA_DV}", CompanyMember.class, id);
+        model.addAttribute("company-member", CompanyMember);
+        return "updateCompanyMember";
     }
 
-    @GetMapping("/delete")
-    public String deleteService(@RequestParam("trackingId") String id) {
-        rest.delete("http://localhost:8080/company/{MA_CT}", id);
-        return "redirect:/company";
+    @GetMapping("/delete") //Xóa Object
+    public String deleteObject(@RequestParam("trackingId") String id) {
+        rest.delete("http://172.16.0.196:8080/company-member/{MA_DV}", id);
+        return "redirect:/company-member"; //ve duong dan tong tuong ung
     }
 
-    @GetMapping("/search")
-    public String searchService(@RequestParam("keyword") String keyword, Model model) {
-        List<Company> companyList = Arrays.asList(rest.getForObject("http://localhost:8080/company/search?keyword=" + keyword, Company[].class));
-        model.addAttribute("companyList", companyList);
-        return "/company/listCompany";
+    @GetMapping("/search") //Tìm kiếm trả về object theo id - Trang search
+    public String searchObject(@RequestParam("keyword") String keyword, Model model) {
+        List<CompanyMember> companyMemberList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company-member/search?keyword=" + keyword, CompanyMember[].class));
+        model.addAttribute("company-members", companyMemberList);
+        return "searchCompanyMember";
     }
 
-    @PostMapping
-    public String addServices(Company company) {
-        System.out.println(company);
-        rest.postForObject("http://localhost:8080/company", company, Company.class);
-        return "redirect:/company";
+    @PostMapping //Insert Object xuống Database khi Add Object mới - Kết quả submit của trang add
+    public String savesaveObject(CompanyMember CompanyMember) {
+        System.out.println(CompanyMember);
+        rest.postForObject("http://172.16.0.196:8080/company-member", CompanyMember, CompanyMember.class);
+        return "redirect:/company-member";
     }
 
-    @PostMapping("/update")
-    public String updateServices(Services service) {
-        System.out.println(service);
-        rest.put("http://localhost:8080/company/{MA_CT}", service, service.getMA_DV());
-        return "redirect:/company";
+    @PostMapping("/update") //Update Object xuống Database khi update - Kết quả submit của trang update
+    public String updateObject(CompanyMember CompanyMember) {
+        System.out.println(CompanyMember);
+        rest.put("http://172.16.0.196:8080/company-member/{MA_DV}", CompanyMember, CompanyMember.getMA_NV());
+        return "redirect:/company-member";
     }
 }

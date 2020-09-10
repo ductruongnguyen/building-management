@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/service") //Đường dẫn tổng
+@RequestMapping("/service") //Đường dẫn tổng - Can phai doi
 public class ServiceController {
 
     RestTemplate rest = new RestTemplate();
@@ -21,8 +21,8 @@ public class ServiceController {
     public String showList(Model model) {
         List<Services> servicesList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/service/all", Services[].class));
         System.out.println(servicesList);
-        model.addAttribute("services", servicesList);
-        return "listServices";
+        model.addAttribute("servicesList", servicesList);
+        return "listServices"; //phai doi
     }
 
     @GetMapping("/add") //Chuyển tới form add - Trang add
@@ -41,7 +41,7 @@ public class ServiceController {
     @GetMapping("/delete") //Xóa Object
     public String deleteObject(@RequestParam("trackingId") String id) {
         rest.delete("http://172.16.0.196:8080/service/{MA_DV}", id);
-        return "redirect:/service";
+        return "redirect:/service"; //ve duong dan tong tuong ung
     }
 
     @GetMapping("/search") //Tìm kiếm trả về object theo id - Trang search

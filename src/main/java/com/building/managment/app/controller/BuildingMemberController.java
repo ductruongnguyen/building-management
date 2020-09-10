@@ -24,20 +24,20 @@ public class BuildingMemberController {
         List<BuildingMember> buildingmemberList = Arrays.asList(rest.getForObject("http://localhost:8080/building-member/all", BuildingMember[].class));
         System.out.println(buildingmemberList);
         model.addAttribute("buildingmemberList", buildingmemberList);
-        return "/building-member/listbuildingmember";
+        return "listBuildingMember";
     }
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("buildingmember", new BuildingMember());
-        return "/building-member/addbuildingmember";
+        return "addBuildingMember";
     }
 
     @GetMapping("/update")
     public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
         BuildingMember buildingmember = rest.getForObject("http://localhost:8080/building-member/{MA_NV}", BuildingMember.class, id);
         model.addAttribute("buildingmember", buildingmember);
-        return "/building-member/updatebuildingmember";
+        return "updateBuildingMember";
     }
 
     @GetMapping("/delete")
@@ -50,7 +50,7 @@ public class BuildingMemberController {
     public String searchService(@RequestParam("keyword") String keyword, Model model) {
         List<BuildingMember> buildingmemberList = Arrays.asList(rest.getForObject("http://localhost:8080/building-member/search?keyword=" + keyword, BuildingMember[].class));
         model.addAttribute("buildingmemberList", buildingmemberList);
-        return "/building-member/listbuildingmember";
+        return "searchBuildingMember";
     }
 
     @PostMapping
