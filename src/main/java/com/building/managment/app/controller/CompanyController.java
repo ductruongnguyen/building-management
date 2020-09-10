@@ -51,6 +51,7 @@ public class CompanyController {
         List<CompanyBill> billList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/bill/{MA_CT}", CompanyBill[].class, id));
         System.out.println(billList);
         model.addAttribute("billList", billList);
+        model.addAttribute("MA_CT", id);
         return "listBill";
     }
 
@@ -72,6 +73,15 @@ public class CompanyController {
     public String updateServices(Services service) {
         System.out.println(service);
         rest.put("http://172.16.0.196:8080/company/{MA_CT}", service, service.getMA_DV());
+        return "redirect:/company";
+    }
+
+    @PostMapping("/filter")
+    public String filterBill(@RequestParam("startDate")String startDate, @RequestParam("endDate")String endDate) {
+//        rest.put("http://172.16.0.196:8080/company/{MA_CT}", service, service.getMA_DV());
+
+        System.out.println(startDate);
+        System.out.println(endDate);
         return "redirect:/company";
     }
 }

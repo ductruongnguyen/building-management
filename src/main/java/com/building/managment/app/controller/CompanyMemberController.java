@@ -12,7 +12,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
+<<<<<<< HEAD
 @RequestMapping("/company-member") //Đường dẫn tổng - Can phai doi
+=======
+@RequestMapping("/company-member")
+>>>>>>> fc5f7fdc05ed8fce84b1493bfd320fdc0fed8743
 public class CompanyMemberController {
 
     RestTemplate rest = new RestTemplate();
