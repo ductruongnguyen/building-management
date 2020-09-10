@@ -3,13 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List In Out</title>
+    <title>In-Out</title>
     <!-- Import thu vien -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{css/sb-admin-2.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body id="page-top">
@@ -89,31 +89,34 @@
                                             <div class="card-header chart-grid__header">
                                                 DANH SÁCH RA-VÀO
                                             </div>
-                                            <table class="table table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th>VỊ TRÍ</th>
-                                                    <th>TRẠNG THÁI</th>
-                                                    <th>CHECK TIME</th>
-                                                    <th>ACTION</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr th:each="inout : ${inoutList}">
-                                                    <td th:text="${inout.getVI_TRI()}"></td>
-                                                    <td th:text="${inout.getTRANG_THAI()}"></td>
-                                                    <td th:text="${inout.getCHECK_TIME()}"></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-warning">
-                                                                <a style="color: white;text-decoration: none;"
-                                                                th:href="@{/inout/update(trackingId=${inout.getMA_RV()})}">Sửa</a></button>
-                                                        <button type="button" class="btn btn-danger">
-                                                                <a style="color: white;text-decoration: none;"
-                                                                th:href="@{/inout/delete(trackingId=${inout.getMA_RV()})}">Xóa</a></button>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                            <!-- FORM!!!!!!! (SUA O DAY)-->
+                                            <form th:action="@{/inOut}" method="POST" th:object="${inout}">
+                                                <table class="table table-striped">
+                                                    <tr>
+                                                        <td>MÃ RA-VÀO: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_RV}" th:field="*{MA_RV}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>MÃ THẺ: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_THE}" th:field="*{MA_THE}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>VỊ TRÍ: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{VI_TRI}" th:field="*{VI_TRI}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>TRẠNG THÁI: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{TRANG_THAI}" th:field="*{TRANG_THAI}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>CHECK TIME: </td>
+                                                        <td><input class="form-control" type="text" th:value="*{CHECK_TIME}" th:field="*{CHECK_TIME}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"><input class="btn btn-success" type="submit" value="Save"></td>
+                                                    </tr>
+                                                </table>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -131,10 +134,10 @@
 <!-- END OF WRAPPER -->
 
 <!-- Import JS -->
-<script th:src="@{vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
-<script th:src="@{js/sb-admin-2.min.js}"></script>
+<script th:src="@{../vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{../vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{../vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{../js/sb-admin-2.min.js}"></script>
 
 </body>
 </html>
