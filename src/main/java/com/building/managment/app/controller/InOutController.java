@@ -1,6 +1,5 @@
 package com.building.managment.app.controller;
 
-import com.building.managment.app.model.BuildingMember;
 import com.building.managment.app.model.InOut;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +20,7 @@ public class InOutController {
 
     @GetMapping
     public String showServices(Model model) {
-        List<InOut> inoutList = Arrays.asList(rest.getForObject("http://localhost:8080/in-out/all", InOut[].class));
+        List<InOut> inoutList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/in-out/all", InOut[].class));
         System.out.println(inoutList);
         model.addAttribute("inoutList", inoutList);
         return "listInOut";
@@ -35,20 +34,20 @@ public class InOutController {
 
     @GetMapping("/update")
     public String showUpdateForm(@RequestParam("trackingId") String id, Model model) {
-        InOut inout = rest.getForObject("http://localhost:8080/in-out/{MA_RV}", InOut.class, id);
+        InOut inout = rest.getForObject("http://172.16.0.196:8080/in-out/{MA_RV}", InOut.class, id);
         model.addAttribute("inout", inout);
         return "updateInOut";
     }
 
     @GetMapping("/delete")
     public String deleteService(@RequestParam("trackingId") String id) {
-        rest.delete("http://localhost:8080/in-out/{MA_RV}", id);
+        rest.delete("http://172.16.0.196:8080/in-out/{MA_RV}", id);
         return "redirect:/in-out";
     }
 
     @GetMapping("/search")
     public String searchService(@RequestParam("keyword") String keyword, Model model) {
-        List<InOut> inoutList = Arrays.asList(rest.getForObject("http://localhost:8080/in-out/search?keyword=" + keyword, InOut[].class));
+        List<InOut> inoutList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/in-out/search?keyword=" + keyword, InOut[].class));
         model.addAttribute("inoutList", inoutList);
         return "searchInOut";
     }
@@ -56,14 +55,14 @@ public class InOutController {
     @PostMapping
     public String addServices(InOut inout) {
         System.out.println(inout);
-        rest.postForObject("http://localhost:8080/in-out", inout, InOut.class);
+        rest.postForObject("http://172.16.0.196:8080/in-out", inout, InOut.class);
         return "redirect:/in-out";
     }
 
     @PostMapping("/update")
     public String updateServices(InOut inout) {
         System.out.println(inout);
-        rest.put("http://localhost:8080/in-out/{MA_RV}", inout, inout.getMA_RV());
+        rest.put("http://172.16.0.196:8080/in-out/{MA_RV}", inout, inout.getMA_RV());
         return "redirect:/in-out";
     }
 }

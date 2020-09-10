@@ -41,7 +41,7 @@ public class CompanyMemberController {
     @GetMapping("/delete") //Xóa Object
     public String deleteObject(@RequestParam("trackingId") String id) {
         rest.delete("http://172.16.0.196:8080/company-member/{MA_NV}", id);
-        return "redirect:/company-member"; //ve duong dan tong tuong ung
+        return "redirect:/company"; //ve duong dan tong tuong ung
     }
 
     @GetMapping("/search") //Tìm kiếm trả về object theo id - Trang search
@@ -55,13 +55,13 @@ public class CompanyMemberController {
     public String savesaveObject(CompanyMember companymember) {
         System.out.println(companymember);
         rest.postForObject("http://172.16.0.196:8080/company-member", companymember, CompanyMember.class);
-        return "redirect:/company-member";
+        return "redirect:/company";
     }
 
     @PostMapping("/update") //Update Object xuống Database khi update - Kết quả submit của trang update
     public String updateObject(CompanyMember companymember) {
         System.out.println(companymember);
         rest.put("http://172.16.0.196:8080/company-member/{MA_NV}", companymember, companymember.getMA_NV());
-        return "redirect:/company-member";
+        return "redirect:/company";
     }
 }

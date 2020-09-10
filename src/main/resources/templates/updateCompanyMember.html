@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List company-member</title>
+    <title>Update Company Member</title>
     <!-- Import thu vien -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -74,11 +74,11 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb my-breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company-member}">Nhân Viên Công Ty</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company}">Quản lý công ty</a></li>
                         </ol>
                     </nav>
                     <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
-                    <a type="button" class="btn btn-success" th:href="@{/company-member/add}">Thêm mới</a>
+                    <a type="button" class="btn btn-success" th:href="@{/company-member/add}">Thêm mới nhân viên</a>
                     <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">
@@ -90,7 +90,7 @@
                                                 NHÂN VIÊN CÔNG TY
                                             </div>
                                             <!-- FORM!!!!!!! (SUA O DAY)-->
-                                            <form th:action="@{/companyMember}" method="POST" th:object="${companymember}">
+                                            <form th:action="@{/company-member/update}" method="POST" th:object="${companymember}">
                                                 <table class="table table-striped">
                                                     <tr>
                                                         <td>Mã NV: </td>
@@ -98,7 +98,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Mã CT: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{MA_CT}" th:field="*{MA_CT}"></td>
+                                                        <td><input class="form-control" type="text" th:value="*{MA_CT}" th:field="*{MA_CT}" th:name="maCT"></td>
                                                     </tr>
                                                     <tr>
                                                         <td>TÊN NV: </td>
@@ -106,7 +106,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>NGÀY SINH: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{NGAY_SINH}" th:field="*{NGAY_SINH}"></td>
+                                                        <td><input class="form-control" type="text" th:value="*{NGAY_SINH}" th:field="*{NGAY_SINH}" placeholder="YY-MM-DD"></td>
                                                     </tr>
                                                     <tr>
                                                         <td>CMT: </td>

@@ -16,5 +16,6 @@ public class CompanyBill {
     private String NGAY_KT;
     private float DON_GIA_CS;
     private double MAT_BANG;
+    private double SO_NGAY;
     private double THUC_TRA;
 }

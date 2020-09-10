@@ -2,6 +2,7 @@ package com.building.managment.app.controller;
 
 import com.building.managment.app.model.Company;
 import com.building.managment.app.model.CompanyBill;
+import com.building.managment.app.model.CompanyMember;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,9 +42,16 @@ public class CompanyController {
     }
 
     @GetMapping("/delete")
-    public String deleteService(@RequestParam("trackingId") String id) {
+    public String deleteObject(@RequestParam("trackingId") String id) {
         rest.delete("http://172.16.0.196:8080/company/{MA_CT}", id);
         return "redirect:/company";
+    }
+
+    @GetMapping("/search")
+    public String searchObject(@RequestParam("keyword") String keyword, Model model) {
+        List<Company> companyList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/search?keyword=" + keyword, Company[].class));
+        model.addAttribute("companyList", companyList);
+        return "searchCompany";
     }
 
     @GetMapping("/bill")
@@ -51,14 +59,13 @@ public class CompanyController {
         List<CompanyBill> billList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/bill/{MA_CT}", CompanyBill[].class, id));
         model.addAttribute("billList", billList);
         model.addAttribute("MA_CT", id);
+        double TONG_TIEN = 0;
+        for(CompanyBill bill : billList) {
+            TONG_TIEN += (bill.getTHUC_TRA()*bill.getSO_NGAY());
+        }
+        model.addAttribute("TONG_TIEN", TONG_TIEN + billList.get(0).getMAT_BANG());
+        model.addAttribute("MAT_BANG", billList.get(0).getMAT_BANG());
         return "listBill";
-    }
-
-    @GetMapping("/search")
-    public String searchService(@RequestParam("keyword") String keyword, Model model) {
-        List<Company> companyList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/search?keyword=" + keyword, Company[].class));
-        model.addAttribute("companyList", companyList);
-        return "searchCompany";
     }
 
     @GetMapping("/filter")
@@ -69,18 +76,31 @@ public class CompanyController {
         List<CompanyBill> billList = Arrays.asList(rest.getForObject("http://172.16.0.196:8080/company/bill/" + startDate + "/" + endDate + "/" + maCT, CompanyBill[].class));
         model.addAttribute("billList", billList);
         model.addAttribute("MA_CT", maCT);
+        double TONG_TIEN = 0;
+        for(CompanyBill bill : billList) {
+            TONG_TIEN += (bill.getTHUC_TRA()*bill.getSO_NGAY());
+        }
+        model.addAttribute("TONG_TIEN", TONG_TIEN + billList.get(0).getMAT_BANG());
+        model.addAttribute("MAT_BANG", billList.get(0).getMAT_BANG());
         return "filterBill";
     }
 
+    @GetMapping("/list-member")
+    public String listMem(@RequestParam("trackingId") String maCT, Model model) {
+        List<CompanyMember> companyMembers = Arrays.asList(rest.getForObject("http://172.16.0.196:8080//company-member/list-by-company?MA_CT=" + maCT, CompanyMember[].class));
+        model.addAttribute("companyMembers", companyMembers);
+        return "listCompanyMember";
+    }
+
     @PostMapping
-    public String addServices(Company company) {
+    public String addObject(Company company) {
         System.out.println(company);
         rest.postForObject("http://172.16.0.196:8080/company", company, Company.class);
         return "redirect:/company";
     }
 
     @PostMapping("/update")
-    public String updateServices(Company company) {
+    public String updateObject(Company company) {
         rest.put("http://172.16.0.196:8080/company/{MA_CT}", company, company.getMA_CT());
         return "redirect:/company";
     }

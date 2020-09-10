@@ -78,7 +78,8 @@
                         </ol>
                     </nav>
                     <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
-                    <a type="button" class="btn btn-success" th:href="@{/company/add}">Thêm mới</a>
+                    <a type="button" class="btn btn-success" th:href="@{/company/add}">Thêm mới công ty</a>
+                    <a type="button" class="btn btn-danger" th:href="@{/company/add}">Đăng ký Sử dụng Dịch vụ</a>
                     <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">
@@ -101,6 +102,7 @@
                                                     <th>DIỆN TÍCH</th>
                                                     <th>ACTION</th>
                                                     <th>HÓA ĐƠN</th>
+                                                    <th>THÔNG TIN</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -124,6 +126,11 @@
                                                         <button type="button" class="btn btn-warning">
                                                             <a style="color: black;text-decoration: none;"
                                                                th:href="@{/company/bill(trackingId=${company.getMA_CT()})}">Hóa đơn DV</a></button>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-info">
+                                                        <a style="color: white;text-decoration: none;"
+                                                           th:href="@{/company/list-member(trackingId=${company.getMA_CT()})}">Xem chi tiết</a></button>
                                                     </td>
                                                 </tr>
                                                 </tbody>

@@ -74,11 +74,11 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb my-breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company-member}">Nhân Viên Công Ty</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company}">Quản lý công ty</a></li>
                         </ol>
                     </nav>
                     <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
-                    <a type="button" class="btn btn-success" th:href="@{/company-member/add}">Thêm mới</a>
+                    <a type="button" class="btn btn-success" th:href="@{/company-member/add}">Thêm mới nhân viên</a>
                     <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">
@@ -90,7 +90,7 @@
                                                 NHÂN VIÊN CÔNG TY
                                             </div>
                                             <!-- FORM!!!!!!! (SUA O DAY)-->
-                                            <form th:action="@{/companyMember}" method="POST" th:object="${companymember}">
+                                            <form th:action="@{/company-member}" method="POST" th:object="${companymember}">
                                                 <table class="table table-striped">
                                                     <tr>
                                                         <td>Mã NV: </td>
@@ -106,7 +106,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>NGÀY SINH: </td>
-                                                        <td><input class="form-control" type="text" th:value="*{NGAY_SINH}" th:field="*{NGAY_SINH}"></td>
+                                                        <td><input class="form-control" type="text" th:value="*{NGAY_SINH}" th:field="*{NGAY_SINH}" placeholder="YY-MM-DD"></td>
                                                     </tr>
                                                     <tr>
                                                         <td>CMT: </td>

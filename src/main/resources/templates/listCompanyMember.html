@@ -7,9 +7,9 @@
     <!-- Import thu vien -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{css/sb-admin-2.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../css/sb-admin-2.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body id="page-top">
@@ -74,11 +74,11 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb my-breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company-member}">Nhân Viên Công Ty</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/company}">Quản lý công ty</a></li>
                         </ol>
                     </nav>
                     <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
-                    <a type="button" class="btn btn-success" th:href="@{/company-member/add}">Thêm mới</a>
+                    <a type="button" class="btn btn-success" th:href="@{/company-member/add}">Thêm mới nhân viên</a>
                     <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">
@@ -100,18 +100,18 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr th:each="CompanyMember : ${companyMemberList}">
-                                                    <td th:text="${CompanyMember.getTEN()}"></td>
-                                                    <td th:text="${CompanyMember.getNGAY_SINH()}"></td>
-                                                    <td th:text="${CompanyMember.getCMT()}"></td>
-                                                    <td th:text="${CompanyMember.getSDT()}"></td>
+                                                <tr th:each="companyMember : ${companyMembers}">
+                                                    <td th:text="${companyMember.getTEN()}"></td>
+                                                    <td th:text="${companyMember.getNGAY_SINH()}"></td>
+                                                    <td th:text="${companyMember.getCMT()}"></td>
+                                                    <td th:text="${companyMember.getSDT()}"></td>
                                                     <td>
                                                         <button type="button" class="btn btn-warning">
                                                                 <a style="color: white;text-decoration: none;"
-                                                                th:href="@{/CompanyMember/update(trackingId=${CompanyMember.getMA_NV()})}">Sửa</a></button>
+                                                                th:href="@{/company-member/update(trackingId=${companyMember.getMA_NV()})}">Sửa</a></button>
                                                         <button type="button" class="btn btn-danger">
                                                                 <a style="color: white;text-decoration: none;"
-                                                                th:href="@{/CompanyMember/delete(trackingId=${CompanyMember.getMA_NV()})}">Xóa</a></button>
+                                                                th:href="@{/company-member/delete(trackingId=${companyMember.getMA_NV()})}">Xóa</a></button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -133,10 +133,10 @@
 <!-- END OF WRAPPER -->
 
 <!-- Import JS -->
-<script th:src="@{vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
-<script th:src="@{js/sb-admin-2.min.js}"></script>
+<script th:src="@{../vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{../vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{../vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{../js/sb-admin-2.min.js}"></script>
 
 </body>
 </html>

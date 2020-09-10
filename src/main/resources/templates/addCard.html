@@ -33,7 +33,7 @@
                 </button>
 
                 <!-- TOPBAR - SEARCH (SUA SEARCH O DAY)-->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  th:action="@{/card/search}" method="GET">
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"  action="#" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" name="keyword">
                         <div class="input-group-append">
@@ -74,11 +74,11 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb my-breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/card}">Thẻ Ra-Vào</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/card}">Quản lý Thẻ</a></li>
                         </ol>
                     </nav>
                     <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
-                    <a type="button" class="btn btn-success" th:href="@{/card/add}">Thêm mới</a>
+                    <a type="button" class="btn btn-danger" th:href="@{/card/add}">Đăng ký thẻ</a>
                     <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">

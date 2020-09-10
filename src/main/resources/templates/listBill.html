@@ -111,8 +111,9 @@
                                                     <th>TÊN DV</th>
                                                     <th>NGÀY BD</th>
                                                     <th>NGÀY KT</th>
-                                                    <th>ĐƠN GIÁ CS</th>
+                                                    <th>ĐƠN GIÁ(/NGÀY)</th>
                                                     <th>THỰC TRẢ</th>
+                                                    <th>TỔNG</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -122,6 +123,23 @@
                                                     <td th:text="${comBill.getNGAY_KT()}"></td>
                                                     <td th:text="${#numbers.formatDecimal(comBill.getDON_GIA_CS(), 0, 'COMMA', 0, 'POINT')}"></td>
                                                     <td th:text="${#numbers.formatDecimal(comBill.getTHUC_TRA(), 0, 'COMMA', 0, 'POINT')}"></td>
+                                                    <td th:text="${#numbers.formatDecimal((comBill.getTHUC_TRA()*comBill.getSO_NGAY()), 0, 'COMMA', 0, 'POINT')}"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td style="color: red;">MẶT BẰNG</td>
+                                                    <td style="color: red;" th:text="${#numbers.formatDecimal(MAT_BANG, 0, 'COMMA', 0, 'POINT')}"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td style="color: red; font-weight: bold">TỔNG</td>
+                                                    <td style="color: red; font-weight: bold" th:text="${#numbers.formatDecimal(TONG_TIEN, 0, 'COMMA', 0, 'POINT')}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>

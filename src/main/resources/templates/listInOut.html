@@ -74,11 +74,13 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb my-breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/login}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/in-out}">Danh Sách Ra-Vào</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/in-out}">Quản lý Ra Vào</a></li>
                         </ol>
                     </nav>
-                    <!-- BUTTON THEM MOIIIIIIIIIIIII (SUA O DAY)-->
-                    <a type="button" class="btn btn-success" th:href="@{/in-out/add}">Thêm mới</a>
+                    <!-- BUTTON CHECK INNN (SUA O DAY)-->
+                    <a type="button" class="btn btn-success" th:href="@{/in-out/add}">Check in-out</a>
+                    <!-- BUTTON CHECK ĐĂNG KÝ THẺ (SUA O DAY)-->
+                    <a type="button" class="btn btn-danger" th:href="@{/card/add}">Đăng ký thẻ</a>
                     <!-- TABLE!!!!!!! (SUA O DAY)-->
                     <section class="template-cards">
                         <div class="card card_border">
@@ -92,6 +94,7 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                 <tr>
+                                                    <th>MÃ THẺ</th>
                                                     <th>VỊ TRÍ</th>
                                                     <th>TRẠNG THÁI</th>
                                                     <th>CHECK TIME</th>
@@ -100,16 +103,17 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr th:each="inout : ${inoutList}">
+                                                    <td th:text="${inout.getMA_THE()}"></td>
                                                     <td th:text="${inout.getVI_TRI()}"></td>
                                                     <td th:text="${inout.getTRANG_THAI()}"></td>
                                                     <td th:text="${inout.getCHECK_TIME()}"></td>
                                                     <td>
                                                         <button type="button" class="btn btn-warning">
                                                                 <a style="color: white;text-decoration: none;"
-                                                                th:href="@{/inout/update(trackingId=${inout.getMA_RV()})}">Sửa</a></button>
+                                                                th:href="@{/in-out/update(trackingId=${inout.getMA_RV()})}">Sửa</a></button>
                                                         <button type="button" class="btn btn-danger">
                                                                 <a style="color: white;text-decoration: none;"
-                                                                th:href="@{/inout/delete(trackingId=${inout.getMA_RV()})}">Xóa</a></button>
+                                                                th:href="@{/in-out/delete(trackingId=${inout.getMA_RV()})}">Xóa</a></button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
